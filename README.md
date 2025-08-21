@@ -27,7 +27,7 @@ While working with Dynamic Features, I realized that the ***App***, ***Modules**
 So I came up with an idea:"
 
 ```java
-Build a mechanism similar to Google’s AutoService, but load implementations through assets instead of META-INF. ✨
+Build a mechanism similar to Google’s AutoService, but load implementations through Assets instead of META-INF. ✨
 ```
 
 ## 🛠️Implementation Steps
