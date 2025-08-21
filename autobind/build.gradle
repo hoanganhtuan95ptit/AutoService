@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: '../dependencies.gradle'
+
+android {
+    namespace 'com.hoanganhtuan95ptit.autobind'
+    compileSdk config.compileSdk
+
+    defaultConfig {
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility config.javaVersion
+        targetCompatibility config.javaVersion
+    }
+    kotlinOptions {
+        jvmTarget = config.javaVersion.toString()
+    }
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.11.0'
+}

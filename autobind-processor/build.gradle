@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+apply from: '../dependencies.gradle'
+
+java {
+    sourceCompatibility = config.javaVersion
+    targetCompatibility = config.javaVersion
+}
+
+dependencies {
+    implementation 'com.squareup:kotlinpoet:1.12.0'
+    implementation 'com.google.code.gson:gson:2.11.0'
+}

@@ -1,0 +1,36 @@
+plugins {
+    id 'com.android.dynamic-feature'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+apply from: '../../dependencies.gradle'
+
+android {
+    namespace 'com.hoanganhtuan95ptit.dynamicfeature'
+    compileSdk config.compileSdk
+
+    defaultConfig {
+        minSdkVersion config.minSdk
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility config.javaVersion
+        targetCompatibility config.javaVersion
+    }
+    kotlinOptions {
+        jvmTarget = config.javaVersion.toString()
+    }
+}
+
+dependencies {
+    implementation project(":app")
+//    kapt project(":autobind-processor")
+}

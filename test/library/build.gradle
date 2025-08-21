@@ -1,0 +1,40 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+apply from: '../../dependencies.gradle'
+
+android {
+    namespace 'com.hoanganhtuan95ptit.library'
+    compileSdk config.compileSdk
+
+    defaultConfig {
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility config.javaVersion
+        targetCompatibility config.javaVersion
+    }
+    kotlinOptions {
+        jvmTarget = config.javaVersion.toString()
+    }
+}
+
+dependencies {
+    implementation project(":autobind")
+//    kapt project(":autobind-processor")
+}
