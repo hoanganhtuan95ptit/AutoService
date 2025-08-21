@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
@@ -18,6 +20,12 @@ gradlePlugin {
 java {
     sourceCompatibility = config.javaVersion
     targetCompatibility = config.javaVersion
+}
+
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = config.javaVersion.toString()
+    }
 }
 
 dependencies {
