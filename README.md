@@ -4,10 +4,10 @@ This project is built based on my personal experience and may not be fully optim
 
 ## Problem.
 
-I really like Google’s AutoService, as it helps automate many tasks without worrying about the execution location. However, when using AutoService with Dynamic Feature, a problem occurred. ⚠️
+I really like ***Google’s AutoService***, as it helps automate many tasks without worrying about the execution location. However, when using ***AutoService*** with ***Dynamic Feature***, a problem occurred. ⚠️
 
 In my app, I have a service (interface A), and I want to implement it in different Dynamic Features (A, B, C, …). The goal is for each customer to be configured to use a specific implementation.
-But when integrating AutoService into Dynamic Feature, I got the error:
+But when integrating ***AutoService*** into ***Dynamic Feature***, I got the error:
 
 ```java
 Duplicate META-INF.services
@@ -23,7 +23,7 @@ How can the App, Module, and Dynamic Feature access each other’s implementatio
 
 ## 💡Idea
 
-While working with Dynamic Features, I realized that the App, Modules, and Dynamic Features can all easily access data from the assets folder. 🗂️
+While working with Dynamic Features, I realized that the ***App***, ***Modules***, and ***Dynamic Features*** can all easily access data from the ***assets*** folder. 🗂️
 So I came up with an idea:"
 
 ```java
