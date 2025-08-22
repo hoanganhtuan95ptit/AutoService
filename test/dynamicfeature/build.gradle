@@ -2,7 +2,7 @@ plugins {
     id 'com.android.dynamic-feature'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.hoanganhtuan95ptit.autobind'
+//    id 'com.hoanganhtuan95ptit.autobind'
 }
 
 apply from: '../../dependencies.gradle'
@@ -33,5 +33,5 @@ android {
 
 dependencies {
     implementation project(":app")
-    kapt project(":autobind-processor")
+//    kapt project(":autobind-processor")
 }
