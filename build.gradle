@@ -15,6 +15,7 @@ buildscript {
     dependencies {
         classpath classPaths.gradlePath
         classpath classPaths.kotlinVersion
+        classpath 'com.github.hoanganhtuan95ptit.AutoService:autobind-plugin:1.0.2'
     }
 }
 

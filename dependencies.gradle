@@ -11,7 +11,7 @@ ext {
             minSdk     : 16,
             targetSdk  : 34,
             compileSdk : 34,
-            javaVersion: JavaVersion.VERSION_17
+            javaVersion: JavaVersion.VERSION_1_8
     ]
 
     classPaths = [
