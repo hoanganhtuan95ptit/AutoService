@@ -1,85 +1,91 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package com.hoanganhtuan95ptit.autobind
 
 import android.app.Application
-import android.content.Context
-import com.google.gson.Gson
-
-internal data class Binding(
-    val type: String,
-    val impl: String
-)
-
-internal data class BindingsWrapper(
-    val bindings: List<Binding>
-)
+import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import com.hoanganhtuan95ptit.autobind.utils.exts.createObject
+import com.hoanganhtuan95ptit.autobind.utils.exts.reloadBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.launch
+import java.util.concurrent.ConcurrentHashMap
 
 object AutoBind {
 
     lateinit var application: Application
 
 
-    private val allBindings = mutableListOf<Binding>()
+    private val map = ConcurrentHashMap<String, List<String>>()
+
+    private val loadState = MutableStateFlow(false)
+
 
     fun init(application: Application) {
+
+        if (::application.isInitialized) {
+            return
+        }
+
         this.application = application
+
+        reload()
     }
 
-    fun <T> load(clazz: Class<T>, userCache: Boolean = true): List<T> {
+    fun reload() = ProcessLifecycleOwner.get().lifecycleScope.launch(Dispatchers.IO) {
 
-        val list = allBindings.filter {
-            clazz.name == it.type
-        }.mapNotNull {
-            it.impl.createObject(clazz = clazz)
+        loadState.tryEmit(false)
+
+        val allBindings = this@AutoBind.application.reloadBinding()
+
+        allBindings.groupBy({
+
+            it.type
+        }, {
+
+            it.impl
+        }).mapValues {
+
+            it.value.toSet().toList()
+        }.let {
+
+            map.putAll(it)
         }
 
-        if (list.isNotEmpty() && userCache) {
-            return list
-        }
+        loadState.tryEmit(true)
+    }
 
-        allBindings.addAll(application.reloadBinding())
+    fun forceLoad() {
 
-        return allBindings.filter {
-            clazz.name == it.type
-        }.mapNotNull {
-            it.impl.createObject(clazz = clazz)
+        reload()
+    }
+
+
+    fun <T> load(clazz: Class<T>): List<T> {
+
+        return map[clazz.name]?.mapNotNull { it.createObject(clazz) }.orEmpty()
+    }
+
+    fun <T> loadAsync(clazz: Class<T>): Flow<List<T>> = loadState.mapNotNull {
+
+        if (it) {
+            load(clazz = clazz)
+        } else {
+            null
         }
     }
 
 
-    internal fun <T> String.createObject(clazz: Class<T>) = runCatching {
+    suspend fun awaitLoaded() = loadState.mapNotNull {
 
-        val instance = Class.forName(this).getDeclaredConstructor().newInstance()
-        if (clazz.isInstance(instance)) clazz.cast(instance) else null
-    }.getOrElse {
-
-        null
-    }
-
-    internal fun Context.reloadBinding() = runCatching {
-
-        val gson = Gson()
-
-        val allBindings = mutableListOf<Binding>()
-
-        val fileNames = assets.list("autobind") ?: emptyArray()
-
-        for (fileName in fileNames) if (fileName.endsWith(".json")) {
-
-            // Mở file JSON từ assets và đọc toàn bộ nội dung
-            val json = assets.open("autobind/$fileName")
-                .bufferedReader()
-                .use { it.readText() }
-
-            // Parse JSON thành đối tượng BindingsWrapper
-            val wrapper = gson.fromJson(json, BindingsWrapper::class.java)
-
-            // Thêm tất cả bindings vào danh sách
-            allBindings.addAll(wrapper.bindings)
+        if (it) {
+            true
+        } else {
+            null
         }
-
-        allBindings
-    }.getOrElse {
-
-        emptyList()
-    }
+    }.first()
 }

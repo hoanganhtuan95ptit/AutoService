@@ -35,7 +35,9 @@ class AutoBindProcessor : AbstractProcessor() {
         )
 
         // Nếu không có class nào, dừng xử lý
-        if (elements.isEmpty()) return false
+        if (elements.isEmpty()){
+            return false
+        }
 
         // Lấy moduleName từ Gradle kapt arguments (hoặc default "unknown-module")
         val moduleName = processingEnv.options["moduleName"] ?: "unknown-module"
@@ -72,7 +74,9 @@ class AutoBindProcessor : AbstractProcessor() {
 
 
         // Nếu không có binding nào được tạo, dừng xử lý
-        if (arr.isEmpty) return true
+        if (arr.isEmpty) {
+            return true
+        }
 
         // Tạo object JSON cuối cùng
         val json = JsonObject()
