@@ -9,25 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c455dad-dcf3-46cf-aa49-32bc2d416624" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/autobind/src/main/java/com/hoanganhtuan95ptit/autobind/StartApp.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autobind/src/main/java/com/hoanganhtuan95ptit/autobind/entities/Binding.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autobind/src/main/java/com/hoanganhtuan95ptit/autobind/utils/exts/AssetManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autobind/src/main/java/com/hoanganhtuan95ptit/autobind/utils/exts/Context.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autobind/src/main/java/com/hoanganhtuan95ptit/autobind/utils/exts/String.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bundletool.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/hoanganhtuan95ptit/example/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoanganhtuan95ptit/example/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autobind-processor/src/main/java/com/hoanganhtuan95ptit/autobind/AutoBindProcessor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/autobind-processor/src/main/java/com/hoanganhtuan95ptit/autobind/AutoBindProcessor.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autobind/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/autobind/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autobind/src/main/java/com/hoanganhtuan95ptit/autobind/AutoBind.kt" beforeDir="false" afterPath="$PROJECT_DIR$/autobind/src/main/java/com/hoanganhtuan95ptit/autobind/AutoBind.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dynamicfeature/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/test/dynamicfeature/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dynamicfeature/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test/dynamicfeature/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dynamicfeature2/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/test/dynamicfeature2/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/library/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/test/library/build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="7c455dad-dcf3-46cf-aa49-32bc2d416624" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +18,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=88PX01XCS)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/hoanganhtuan/.android/avd/Pixel_9.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -58,6 +40,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -89,6 +78,11 @@
     "last_opened_file_path": "/Users/hoanganhtuan/AndroidStudioProjects/AutoService"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="com.hoanganhtuan95ptit.startapp" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="AutoBind.app" />
@@ -183,5 +177,21 @@
       <updated>1755774844672</updated>
     </task>
     <servers />
+  </component>
+  <component name="play_dynamic_filters_status">
+    <option name="appIdToCheckInfo">
+      <map>
+        <entry key="com.hoanganhtuan95ptit.example">
+          <value>
+            <CheckInfo lastCheckTimestamp="1756391446224" />
+          </value>
+        </entry>
+        <entry key="com.hoanganhtuan95ptit.example.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1756391446280" />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
