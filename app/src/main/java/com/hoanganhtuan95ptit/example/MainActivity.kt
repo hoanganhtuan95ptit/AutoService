@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        AutoBind.init(application)
-
         val manager = SplitInstallManagerFactory.create(this)
 
         val request = SplitInstallRequest.newBuilder()

@@ -79,6 +79,20 @@ object AutoBind {
         }
     }
 
+    fun <T> loadName(clazz: Class<T>): List<String> {
+
+        return map[clazz.name].orEmpty()
+    }
+
+    fun <T> loadNameAsync(clazz: Class<T>): Flow<List<String>> = loadState.mapNotNull {
+
+        if (it) {
+            loadName(clazz = clazz)
+        } else {
+            null
+        }
+    }
+
 
     suspend fun awaitLoaded() = loadState.mapNotNull {
 

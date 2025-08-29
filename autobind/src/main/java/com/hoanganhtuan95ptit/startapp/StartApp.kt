@@ -1,9 +1,10 @@
-package com.hoanganhtuan95ptit.autobind
+package com.hoanganhtuan95ptit.startapp
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import com.hoanganhtuan95ptit.autobind.AutoBind
+import com.hoanganhtuan95ptit.autobind.utils.exts.createObject
 import kotlinx.coroutines.launch
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -15,23 +16,20 @@ object StartApp {
 
         AutoBind.init(application)
 
+        val clazz = ModuleInitializer::class.java
+
         ProcessLifecycleOwner.get().lifecycleScope.launch {
 
-            AutoBind.loadAsync(Initializer::class.java).collect { list ->
+            AutoBind.loadNameAsync(clazz).collect { list ->
 
                 list.forEach {
 
-                    if (it.javaClass.name in handledList) return@forEach
+                    if (it in handledList) return@forEach
+                    handledList.add(it)
 
-                    handledList.add(it.javaClass.name)
-                    it.create(application)
+                    it.createObject(clazz)?.create(application)
                 }
             }
         }
     }
-}
-
-interface Initializer {
-
-    fun create(context: Context)
 }
