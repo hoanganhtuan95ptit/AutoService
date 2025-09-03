@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import java.util.concurrent.ConcurrentHashMap
 
@@ -82,14 +81,7 @@ object AutoBind {
         loadNamesFlow(clazz)
 
 
-    suspend fun awaitLoaded() = loadState.mapNotNull {
-
-        if (it) {
-            true
-        } else {
-            null
-        }
-    }.first()
+    suspend fun awaitLoaded() = loadState.filter { it }.first()
 
 
     private fun <T> List<String>?.createObject(clazz: Class<T>) = this?.mapNotNull { it.createObject(clazz) }.orEmpty()

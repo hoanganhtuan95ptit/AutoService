@@ -14,7 +14,7 @@ import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.hoanganhtuan95ptit.autobind.AutoBind
 import com.hoanganhtuan95ptit.autobind.utils.exts.createObject
 import com.hoanganhtuan95ptit.autobind.utils.exts.distinctPattern
-import com.hoanganhtuan95ptit.startapp.StartApp.currentActivity
+import com.hoanganhtuan95ptit.startapp.StartApp.activityFlow
 import kotlinx.coroutines.launch
 
 class StartAppInitializer : Initializer<Unit> {
@@ -63,11 +63,11 @@ class StartAppInitializer : Initializer<Unit> {
             }
 
             override fun onActivityResumed(activity: Activity) {
-                currentActivity = activity
+                activityFlow.value = activity
             }
 
             override fun onActivityPaused(activity: Activity) {
-                if (currentActivity === activity) currentActivity = null
+                if (activityFlow.value == activity) activityFlow.value = null
             }
 
             override fun onActivityStopped(activity: Activity) {
