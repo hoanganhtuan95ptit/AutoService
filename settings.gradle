@@ -3,7 +3,6 @@ rootProject.name = "AutoBind"
 include ':app'
 
 include ':autobind'
-include ':autobind-plugin'
 include ':autobind-processor'
 
 include ':test:library'

@@ -2,7 +2,6 @@ plugins {
     id 'com.android.dynamic-feature'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.hoanganhtuan95ptit.autobind'
 }
 
 apply from: '../../dependencies.gradle'

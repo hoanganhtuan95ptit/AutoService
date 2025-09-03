@@ -3,7 +3,6 @@ package com.hoanganhtuan95ptit.example
 import android.app.Application
 import android.content.Context
 import com.google.android.play.core.splitcompat.SplitCompat
-import com.hoanganhtuan95ptit.startapp.StartApp
 
 class App: Application() {
 
@@ -14,7 +13,5 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        StartApp.init(this)
     }
 }

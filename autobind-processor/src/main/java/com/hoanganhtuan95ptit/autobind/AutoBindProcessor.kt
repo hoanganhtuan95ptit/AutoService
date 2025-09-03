@@ -2,6 +2,7 @@ package com.hoanganhtuan95ptit.autobind
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import java.io.File
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.RoundEnvironment
 import javax.annotation.processing.SupportedSourceVersion
@@ -39,9 +40,6 @@ class AutoBindProcessor : AbstractProcessor() {
             return false
         }
 
-        // Lấy moduleName từ Gradle kapt arguments (hoặc default "unknown-module")
-        val moduleName = processingEnv.options["moduleName"] ?: "unknown-module"
-
         // JsonArray để chứa tất cả bindings
         val arr = JsonArray()
 
@@ -75,7 +73,7 @@ class AutoBindProcessor : AbstractProcessor() {
 
         // Nếu không có binding nào được tạo, dừng xử lý
         if (arr.isEmpty) {
-            return true
+            return false
         }
 
         // Tạo object JSON cuối cùng
@@ -83,22 +81,42 @@ class AutoBindProcessor : AbstractProcessor() {
         json.add("bindings", arr)
 
         // Ghi file JSON vào CLASS_OUTPUT/assets/autobind/
-        writeJsonFile(moduleName, json.toString())
+        writeJsonFile(json.toString())
 
         return true
     }
 
     // Hàm ghi file JSON
-    private fun writeJsonFile(moduleName: String, content: String) = kotlin.runCatching {
+    private fun writeJsonFile(content: String) = kotlin.runCatching {
 
         val fileObject = processingEnv.filer.createResource(
             StandardLocation.CLASS_OUTPUT,
-            "", // package để trống
-            "assets/autobind/$moduleName.json"
+            "",
+            "dummy.txt"
         )
 
-        fileObject.openWriter().use {
-            it.write(content)
+        val path = File(fileObject.toUri())
+
+        // Tìm moduleDir (cha của build)
+        val moduleDir = generateSequence(path) { it.parentFile }
+            .firstOrNull { it.name == "build" }
+            ?.parentFile ?: error("Cannot find moduleDir")
+
+        // Lấy variantName (thư mục ngay sau "classes")
+        val parts = path.invariantSeparatorsPath.split("/")
+        val classesIndex = parts.indexOf("classes")
+        val variantName = if (classesIndex != -1 && classesIndex + 1 < parts.size) {
+            parts[classesIndex + 1]
+        } else {
+            "main" // fallback
         }
+
+        val moduleName = moduleDir.name
+
+        // Ghi vào src/<variantName>/assets/autobind/<module>.json
+        val assetsDir = File(moduleDir, "src/$variantName/assets/autobind").apply { mkdirs() }
+        val outFile = File(assetsDir, "$moduleName.json")
+
+        outFile.writeText(content, Charsets.UTF_8)
     }
 }

@@ -8,7 +8,7 @@ ext {
     def appCompatVersion = "1.1.0-alpha02"
 
     config = [
-            minSdk     : 16,
+            minSdk     : 21,
             targetSdk  : 34,
             compileSdk : 34,
             javaVersion: JavaVersion.VERSION_1_8
