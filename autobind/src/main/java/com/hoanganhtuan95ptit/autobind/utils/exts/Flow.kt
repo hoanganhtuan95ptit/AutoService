@@ -9,11 +9,13 @@ fun Flow<List<String>>.distinctPattern() = flow {
 
     collect { list ->
 
-        list.filter {
+        val listFilter = list.filter {
             handled.add(it)
-        }.let {
+        }
 
-            emit(it)
+        if (listFilter.isNotEmpty()) {
+
+            emit(listFilter)
         }
     }
 }
