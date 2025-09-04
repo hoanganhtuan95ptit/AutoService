@@ -77,8 +77,8 @@ object AutoBind {
     fun <T> loadName(clazz: Class<T>): List<String> =
         map[clazz.name].orEmpty()
 
-    fun <T> loadNameAsync(clazz: Class<T>): Flow<List<String>> =
-        loadNamesFlow(clazz)
+    fun <T> loadNameAsync(clazz: Class<T>, distinctPattern: Boolean = true): Flow<List<String>> =
+        loadNamesFlow(clazz, distinctPattern)
 
 
     suspend fun awaitLoaded() = loadState.filter { it }.first()
