@@ -27,17 +27,11 @@ class StartAppInitializer : Initializer<Unit> {
         AutoBind.init(context)
 
 
-
         ProcessLifecycleOwner.get().lifecycleScope.launch {
 
-            val clazz = ModuleInitializer::class.java
+            AutoBind.loadAsync(ModuleInitializer::class.java, true).collect { list ->
 
-            AutoBind.loadNameAsync(clazz).distinctPattern().collect { list ->
-
-                list.forEach {
-
-                    it.createObject(clazz)?.create(context)
-                }
+                list.forEach { it.create(context) }
             }
         }
 
@@ -51,7 +45,6 @@ class StartAppInitializer : Initializer<Unit> {
         }
 
         SplitInstallManagerFactory.create(context).registerListener(listener)
-
 
 
         context.registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
